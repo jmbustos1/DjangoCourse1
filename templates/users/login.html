@@ -1,0 +1,28 @@
+<!-- Archivo template/users/login.html -->
+{% extends "users/base.html" %}
+
+{% block head_content %}
+<title>Firstapp sign in</title>
+{% endblock %}
+
+{% block container %}
+
+<!-- Como anteriormente le dimos un alias al path 'users/login/' ahora lo invocaremos como 'login'. -->
+<form method="POST" action="{% url 'users:login' %}">
+
+  <!-- En caso de que estemos recibiendo la variable 'error' en el renderizado lo mostraremos. -->
+  {% if error %}
+    <p style="color: red;">{{ error }}</p>
+  {% endif %}
+
+  <!-- csrf_token es un metodo de Django para evitar ataques CSRF. Te lo explico mejor abajo. -->
+  {% csrf_token %}
+
+  <input type="text" placeholder="Username" name="username" />
+  <input type="password" placeholder="Password" name="password" />
+
+  <button type="submit">Sign in!</button>
+
+</form>
+
+{% endblock %}

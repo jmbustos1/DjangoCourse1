@@ -1,0 +1,32 @@
+<!-- Archivo template/users/signup.html -->
+
+{% extends 'users/base.html' %}
+
+{% block head_content %}
+<title>Firstapp sign up</title>
+{% endblock %}
+
+{% block container %}
+
+  <!-- En caso de un error desplegaremos el mensaje aqui -->
+  {% if error %}
+    <p class="alert alert-danger">{{ error }}</p>
+  {% endif %}
+
+  <!-- Este sera el formulario de registro -->
+  <form actions="{% url 'signup' %}" method="POST">
+    <!-- No olvidar que para los formularios en Django debemos hacer uso de csrf_token -->
+    {% csrf_token %}
+
+    <div class="form-group"><input type="text" class="form-control" placeholder="Username" name="username" required="true"></div>
+    <div class="form-group"><input type="password" class="form-control" placeholder="Password" name="password" required="true"></div>
+    <div class="form-group"><input type="password" class="form-control" placeholder="Password confirmation" name="password_confirmation" required="true"></div>
+    <div class="form-group"><input type="text" class="form-control" placeholder="First name" name="first_name" required="true"></div>
+    <div class="form-group"><input type="text" class="form-control" placeholder="Last name" name="last_name" required="true"></div>
+    <div class="form-group"><input type="email" class="form-control" placeholder="Email address" name="email" required="true"></div>
+
+    <button class="btn btn-primary btn-block mt-5" type="submit">Register!</button>
+
+  </form>
+
+{% endblock %}
